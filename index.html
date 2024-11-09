@@ -1,1 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Колесо фортуны</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #87ceeb; /* Голубой фон */
+      font-family: Arial, sans-serif;
+    }
+
+    .wheel-container {
+      text-align: center;
+      width: 100%;
+      max-width: 400px; /* Максимальная ширина для мобильной адаптации */
+      padding: 10px;
+    }
+
+    h1 {
+      font-size: 1.5em;
+      margin-bottom: 20px;
+    }
+
+    .wheel-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto 20px;
+    }
+
+    .wheel {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1; /* Квадратное колесо для мобильных устройств */
+      border: 10px solid yellow;
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+    }
+
+    .wheel-inner {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      transform: rotate(0deg);
+      transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
+    }
+
+    .sector {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      transform-origin: 100% 100%;
+      clip-path: polygon(0 0, 100% 0, 100% 100%);
+      transform: rotate(calc(var(--i) * 30deg));
+    }
+
+    .sector img {
+      width: 60%; /* Более крупное изображение */
+      height: auto;
+      border: 3px solid white; /* Белая рамка */
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-90deg); /* Центрируем и поворачиваем стрелку вверх */
+      width: 0;
+      height: 0;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-top: 20px solid yellow; /* Треугольник, указывающий вверх */
+      z-index: 2;
+    }
+
+    #spin-btn {
+      padding: 15px 25px;
+      font-size: 18px;
+      background-color: #f54242;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: block;
+      width: 100%;
+      max-width: 200px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="wheel-container">
+    <h1>DAILY WHEEL</h1>
+    <div class="wheel-wrapper">
+      <div class="wheel">
+        <div class="arrow"></div> <!-- Стрелка, указывающая вверх из центра -->
+        <div class="wheel-inner">
+          <!-- Сектора с изображениями -->
+          <div class="sector" style="--i:0;"><img src="img1.png" alt="Приз"></div>
+          <div class="sector" style="--i:1;"><img src="img2.png" alt="Приз"></div>
+          <div class="sector" style="--i:2;"><img src="img3.png" alt="Приз"></div>
+          <div class="sector" style="--i:3;"><img src="img4.png" alt="Приз"></div>
+          <div class="sector" style="--i:4;"><img src="img5.png" alt="Приз"></div>
+          <div class="sector" style="--i:5;"><img src="img6.png" alt="Приз"></div>
+          <div class="sector" style="--i:6;"><img src="img7.png" alt="Приз"></div>
+          <div class="sector" style="--i:7;"><img src="img8.png" alt="Приз"></div>
+          <div class="sector" style="--i:8;"><img src="img9.png" alt="Приз"></div>
+          <div class="sector" style="--i:9;"><img src="img10.png" alt="Приз"></div>
+          <div class="sector" style="--i:10;"><img src="img11.png" alt="Приз"></div>
+          <div class="sector" style="--i:11;"><img src="img12.png" alt="Приз"></div>
+        </div>
+      </div>
+    </div>
+    <button id="spin-btn">SPIN</button>
+  </div>
+  <script>
+    const spinButton = document.getElementById('spin-btn');
+    const wheel = document.querySelector('.wheel-inner');
+
+    spinButton.addEventListener('click', () => {
+      const randomDegree = Math.floor(Math.random() * 3600) + 720; // Задаем случайный угол вращения
+      wheel.style.transform = `rotate(${randomDegree}deg)`;
+    });
+  </script>
+</body>
+</html>
 
